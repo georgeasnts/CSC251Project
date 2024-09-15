@@ -32,6 +32,7 @@ public class Policy {
    this.smokingStatus = smokingStatus;
    this.height = height;
    this.weight = weight;
+}
 
 // methods 
 
@@ -43,7 +44,7 @@ public void setPolicyNumber(int policyNumber) {
    this.policyNumber = policyNumber;
 }
 
-public String getproviderName() {
+public String getProviderName() {
    return providerName;
 }
 
@@ -59,7 +60,7 @@ public void setPolicyholderFirstName(String policyholderFirstName) {
    this.policyholderFirstName = policyholderFirstName;
 }
 
-public String getPolicyholderLasttName() {
+public String getPolicyholderLastName() {
    return policyholderLastName;
 }
 
