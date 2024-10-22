@@ -1,57 +1,56 @@
-<<<<<<< Updated upstream
-=======
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Project_georgea_freitas {
 
     public static void main(String[] args) {
-        // Create a Scanner object for user input
-        Scanner input = new Scanner(System.in);
+        // Create an ArrayList to store Policy objects
+        ArrayList<Policy> policyList = new ArrayList<>();
 
-        // Get information from the user
-        System.out.print("Please enter the Policy Number: ");
-        int policyNumber = input.nextInt();
+        try {
+            // Open the PolicyInformation.txt file
+            File file = new File("PolicyInformation.txt");
+            Scanner fileScanner = new Scanner(file);
 
-        input.nextLine();  // Consume the newline character left by nextInt()
+            // Read file line by line and create Policy objects
+            while (fileScanner.hasNext()) {
+                int policyNumber = fileScanner.nextInt();
+                fileScanner.nextLine(); // Consume the newline character
+                String providerName = fileScanner.nextLine();
+                String firstName = fileScanner.nextLine();
+                String lastName = fileScanner.nextLine();
+                int age = fileScanner.nextInt();
+                String smokingStatus = fileScanner.next();
+                double height = fileScanner.nextDouble();
+                double weight = fileScanner.nextDouble();
+                fileScanner.nextLine(); // Consume the newline character after weight
 
-        System.out.print("Please enter the Provider Name: ");
-        String providerName = input.nextLine();
+                // Create a Policy object using the constructor
+                Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
 
-        System.out.print("Please enter the Policyholder’s First Name: ");
-        String firstName = input.nextLine();
+                // Add the Policy object to the ArrayList
+                policyList.add(policy);
+            }
 
-        System.out.print("Please enter the Policyholder’s Last Name: ");
-        String lastName = input.nextLine();
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File not found.");
+        }
 
-        System.out.print("Please enter the Policyholder’s Age: ");
-        int age = input.nextInt();
-
-        System.out.print("Please enter the Policyholder’s Smoking Status (smoker/non-smoker): ");
-        String smokingStatus = input.next();
-
-        System.out.print("Please enter the Policyholder’s Height (in inches): ");
-        double height = input.nextDouble();
-
-        System.out.print("Please enter the Policyholder’s Weight (in pounds): ");
-        double weight = input.nextDouble();
-
-        // Create a Policy object using the constructor that accepts arguments
-        Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
-
-        // Display the policy information
-        System.out.println("\nPolicy Number: " + policy.getPolicyNumber());
-        System.out.println("Provider Name: " + policy.getProviderName());
-        System.out.println("Policyholder’s First Name: " + policy.getPolicyholderFirstName());
-        System.out.println("Policyholder’s Last Name: " + policy.getPolicyholderLastName());
-        System.out.println("Policyholder’s Age: " + policy.getPolicyholderAge());
-        System.out.println("Policyholder’s Smoking Status: " + policy.getSmokingStatus());
-        System.out.println("Policyholder’s Height: " + policy.getHeight() + " inches");
-        System.out.println("Policyholder’s Weight: " + policy.getWeight() + " pounds");
-        System.out.printf("Policyholder’s BMI: %.2f\n", policy.calculateBMI());
-        System.out.printf("Policy Price: $%.2f\n", policy.calculatePolicyPrice());
-
-        // Close the scanner
-        input.close();
+        // Display the policy information for each policy in the list
+        for (Policy policy : policyList) {
+            System.out.println("\nPolicy Number: " + policy.getPolicyNumber());
+            System.out.println("Provider Name: " + policy.getProviderName());
+            System.out.println("Policyholder’s First Name: " + policy.getPolicyholderFirstName());
+            System.out.println("Policyholder’s Last Name: " + policy.getPolicyholderLastName());
+            System.out.println("Policyholder’s Age: " + policy.getPolicyholderAge());
+            System.out.println("Policyholder’s Smoking Status: " + policy.getSmokingStatus());
+            System.out.println("Policyholder’s Height: " + policy.getHeight() + " inches");
+            System.out.println("Policyholder’s Weight: " + policy.getWeight() + " pounds");
+            System.out.printf("Policyholder’s BMI: %.2f\n", policy.calculateBMI());
+            System.out.printf("Policy Price: $%.2f\n", policy.calculatePolicyPrice());
+        }
     }
 }
->>>>>>> Stashed changes
